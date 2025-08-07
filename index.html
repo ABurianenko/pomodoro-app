@@ -10,7 +10,7 @@
 <body>
     <header>
         <span>pomodoro</span>
-        <button type="reset" class="refresh">
+        <button type="reset" id="reset">
             <svg width="24" height="24">
                 <use href="./src/svg/symbol-defs.svg#icon-Refresh-2"></use>
             </svg>
@@ -31,7 +31,7 @@
         </nav>
         <button class="start-pause">
             <svg>
-                <use href="./src/svg/symbol-defs.svg#icon-Play"></use>
+                <use id="btn" href="./src/svg/symbol-defs.svg#icon-Play"></use>
             </svg>
         </button>
 
@@ -48,17 +48,17 @@
             <main>
                 <h3>time (minutes)</h3>
                 <form action="">
-                    <label for="">
+                    <label>
                         pomodoro
-                        <input type="number">
+                        <input type="number" name="pomodoro">
                     </label>
-                    <label for="">
+                    <label>
                         short break
-                        <input type="number">
+                        <input type="number" name="short">
                     </label>
-                    <label for="">
+                    <label>
                         long break
-                        <input type="number">
+                        <input type="number" name="long">
                     </label>
                 </form>
             </main>
