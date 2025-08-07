@@ -7,12 +7,15 @@ import { timerState } from "./state";
 // let timeLeft = timerState.timeLeft;
 // timeLeft = duration * 60;
 
-const startBtn = document.querySelector('.start-pause')
+const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
 const btnIcon = document.getElementById('btn');
 
 const startTimer = () => {
     if (timerState.isRunning) {
+        clearInterval(timerState.intervalId);
+        timerState.isRunning = false;
+        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
         return
     }
 
@@ -34,10 +37,16 @@ const startTimer = () => {
 }
 
 const resetTimer = () => {
-    
+    clearInterval(timerState.intervalId);
+    timerState.isRunning = false;
+    timerState.timeLeft = 0;
+    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+    updateDisplay();
+    return;
 }
 
 resetBtn?.addEventListener('click', resetTimer);
 startBtn?.addEventListener('click', startTimer)
+
 
 export { };
