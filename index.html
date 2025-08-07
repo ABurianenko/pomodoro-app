@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <header>
-        <span>pomodoro</span>
+        <span class="logo">pomodoro</span>
         <button type="reset" id="reset">
             <svg width="24" height="24">
                 <use href="./src/svg/symbol-defs.svg#icon-Refresh-2"></use>
@@ -22,13 +23,11 @@
                 00:00
             </h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="">short break</a></li>
-                <li><a href="">pomodoro</a></li>
-                <li><a href="">long break</a></li>
-            </ul>
-        </nav>
+        <ul class="mode">
+            <li class="mode-item">short break</li>
+            <li class="mode-item">pomodoro</li>
+            <li class="mode-item">long break</li>
+        </ul>
         <button class="start">
             <svg>
                 <use id="btn" href="./src/svg/symbol-defs.svg#icon-Play"></use>
@@ -36,7 +35,7 @@
         </button>
 
 
-        <div class="modal">
+        <div class="modal hidden">
             <header>
                 <h2>Settings</h2>
                 <button type="button" data-action="close">
