@@ -18,8 +18,6 @@ body {
   max-width: 400px;
   min-height: 100vh;
   padding: 66px 52px 44px 44px;
-
-  border: 1px solid salmon;
 }
 
 header {
@@ -77,10 +75,6 @@ header {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-}
-
-.hidden {
-  display: none;
 }
 
 .mode {
@@ -210,4 +204,222 @@ header {
   height: 10px;
   border-radius: 50%;
   background-color: var(--main-color);
+}
+
+.modal {
+  position: fixed;
+  left: 49%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+
+  width: min(80vw, 360px);
+  max-height: 80vh;
+
+  background-color: var(--main-color);
+  color: #fafafa;
+  border-radius: 50px;
+  box-shadow: 5px 5px 50px 0 rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+body.modal-open .modal {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.modal-open .time-circle,
+body.modal-open .mode-container {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.40);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 44px 12px 48px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  width: 16px;
+  height: 16px;
+  fill: #fafafa;
+}
+
+.modal-subtitle {
+  opacity: 0.7;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.9px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-form {
+  padding: 10px 20px 10px 48px;
+  
+  display: grid;
+  gap: 8px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.40);
+}
+
+[hidden] {
+  display: none;
+}
+
+.duration-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.duration-label {
+  opacity: 0.7;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.combo {
+  position: relative;
+  width: 124px;
+  height: 44px;
+}
+
+.combo__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.combo__value {
+  letter-spacing: 0.5px;
+}
+
+.combo__chevron {
+  width: 20px;
+  height: 20px;
+  opacity: .9;
+  transition: transform 0.2s ease;
+}
+
+.combo__button[aria-expanded="true"] .combo__chevron {
+  transform: rotate(180deg);
+}
+
+.combo__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 100%;
+  max-height: 220px;
+  overflow: auto;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .30);
+  border: 1px solid rgba(255, 255, 255, .40);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+  list-style: none;
+  z-index: 10;
+}
+
+.combo__list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.combo__list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .45);
+  border-radius: 6px;
+}
+
+.combo__option {
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.combo__option:hover,
+.combo__option[aria-selected="true"] {
+  background: rgba(255, 255, 255, .35);
+}
+
+.combo__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, .40);
+  background: rgba(255, 255, 255, .30);
+  color: #fff;
+  font-weight: 600;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: textfield;
+}
+
+.combo__button:focus-visible,
+.combo__input:focus-visible,
+.combo__option:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, .75);
+  outline-offset: 2px;
+}
+
+.modal-footer {
+  margin-top: 24px;
+  margin-bottom: 44px;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  background-color: transparent;
+  border: none;
+
+  color: rgba(255, 255, 255, 0.90);
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.9px;
 }

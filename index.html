@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body class="modal-open">
     <header>
         <span class="logo">pomodoro</span>
         <button type="reset" id="reset">
@@ -35,7 +35,101 @@
             <svg>
                 <use id="btn" href="./src/svg/symbol-defs.svg#icon-Play"></use>
             </svg>
-        </button>    
+        </button>  
+        
+        <div class="modal">
+            <header class="modal-header">
+                <h2 class="modal-title">Settings</h2>
+                <button class="close-btn" type="button" data-action="close">
+                    <svg>
+                        <use href="./src/svg/symbol-defs.svg#icon-Close" width="17" height="17"></use>
+                    </svg>
+                </button>
+            </header>
+            <main>
+                
+                <form class="modal-form">
+                    <legend class="modal-subtitle">time (minutes)</legend>
+
+                    <!-- Pomodoro -->
+                    <div class="duration-row" data-mode="pomodoro">
+                        <label class="duration-label" id="lbl-pomo">pomodoro</label>
+                    
+                        <div class="combo" data-mode="pomodoro">
+                            <button type="button" class="combo__button" id="combo-btn-pomo" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-pomo" aria-labelledby="lbl-pomo combo-btn-pomo">
+                                <span class="combo__value" data-value="25" aria-live="polite">25</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                            <ul class="combo__list" id="combo-list-pomo" role="listbox" aria-labelledby="lbl-pomo" hidden>
+                                <li class="combo__option" role="option" data-value="15">15</li>
+                                <li class="combo__option" role="option" data-value="20">20</li>
+                                <li class="combo__option" role="option" data-value="25" aria-selected="true">25</li>
+                                <li class="combo__option" role="option" data-value="30">30</li>
+                                <li class="combo__option" role="option" data-value="35">35</li>
+                            </ul>
+                    
+                            <!-- Інпут для ручного введення (показується при даблкліку) -->
+                            <input class="combo__input" type="number" inputmode="numeric" min="1" max="180" step="1"
+                                aria-label="Set pomodoro minutes" hidden />
+                        </div>
+                    </div>
+
+                    <!-- Short break -->
+                    <div class="duration-row" data-mode="short">
+                        <label class="duration-label" id="lbl-short">short break</label>
+                    
+                        <div class="combo" data-mode="short">
+                            <button type="button" class="combo__button" id="combo-btn-short" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-short" aria-labelledby="lbl-short combo-btn-short">
+                                <span class="combo__value" data-value="5" aria-live="polite">05</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                    
+                            <ul class="combo__list" id="combo-list-short" role="listbox" aria-labelledby="lbl-short" hidden>
+                                <li class="combo__option" role="option" data-value="3">03</li>
+                                <li class="combo__option" role="option" data-value="5" aria-selected="true">05</li>
+                                <li class="combo__option" role="option" data-value="10">10</li>
+                            </ul>
+                    
+                            <input class="combo__input" type="number" inputmode="numeric" min="1" max="60" step="1"
+                                aria-label="Set short break minutes" hidden />
+                        </div>
+                    </div>
+                    
+                    <!-- Long break -->
+                    <div class="duration-row" data-mode="long">
+                        <label class="duration-label" id="lbl-long">long break</label>
+                    
+                        <div class="combo" data-mode="long">
+                            <button type="button" class="combo__button" id="combo-btn-long" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-long" aria-labelledby="lbl-long combo-btn-long">
+                                <span class="combo__value" data-value="20" aria-live="polite">20</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                    
+                            <ul class="combo__list" id="combo-list-long" role="listbox" aria-labelledby="lbl-long" hidden>
+                                <li class="combo__option" role="option" data-value="15">15</li>
+                                <li class="combo__option" role="option" data-value="20" aria-selected="true">20</li>
+                                <li class="combo__option" role="option" data-value="25">25</li>
+                                <li class="combo__option" role="option" data-value="30">30</li>
+                            </ul>
+                    
+                            <input class="combo__input" type="number" inputmode="numeric" min="1" max="120" step="1"
+                                aria-label="Set long break minutes" hidden />
+                        </div>
+                </form>
+            </main>
+            <footer class="modal-footer">
+                <button class="submit-btn" type="button" data-action="save">OK</button>
+            </footer>
+        </div>
     </main>
 
     <footer class="bottom-bar">
@@ -60,36 +154,7 @@
         
     </footer>
 
-    <div class="modal hidden">
-        <header>
-            <h2>Settings</h2>
-            <button type="button" data-action="close">
-                <svg>
-                    <use href="./src/svg/symbol-defs.svg#icon-Close"></use>
-                </svg>
-            </button>
-        </header>
-        <main>
-            <h3>time (minutes)</h3>
-            <form action="">
-                <label>
-                    pomodoro
-                    <input type="number" name="pomodoro">
-                </label>
-                <label>
-                    short break
-                    <input type="number" name="short">
-                </label>
-                <label>
-                    long break
-                    <input type="number" name="long">
-                </label>
-            </form>
-        </main>
-        <footer>
-            <button type="button" data-action="save">OK</button>
-        </footer>
-    </div>
+    
 </body>
 
 <script type="module" src="./src/ts/index.ts"></script>
