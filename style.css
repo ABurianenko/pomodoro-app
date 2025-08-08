@@ -10,6 +10,7 @@
 }
 
 body {
+  position: relative;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -86,7 +87,20 @@ header {
   list-style: none;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 120px;
+  align-items: center;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.mode::after {
+  content: "";
+  position: absolute;
+  margin: 37px auto 0;
+  width: 308px;
+  height: 8px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.02);
+  z-index: 0;
 }
 
 .mode-item {
@@ -98,9 +112,29 @@ header {
   line-height: normal;
 }
 
+.isActive {
+  font-size: 24px;
+  color: var(--main-color);
+}
+
+.isActive::after {
+  content: "";
+  display: block;
+  margin: 10px auto 0;
+  width: 50px;
+  height: 8px;
+  border-radius: 20px;
+  background-color: var(--main-color);
+  z-index: 2;
+}
+
 .start {
   width: 100px;
   height: 100px;
+  margin-top: 102px;
+  
+  position: relative;
+  left: 222px;
 
   background-color: var(--main-color);
   box-shadow: 
@@ -123,4 +157,57 @@ header {
   height: 36px;
 
   fill: #fafafa;
+}
+
+.bottom-bar {
+  position: relative;
+
+}
+
+.bar-curve {
+  position: absolute;
+  top: -44px;
+  left: -46px;
+  
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bar-curve path {
+  fill: none;
+  stroke: var(--main-color);
+  stroke-width: 1;
+}
+
+.bar-buttons {
+  position: relative;
+  top: -10px;
+  display: flex;
+  align-items: start;
+  gap: 4.5em;
+}
+
+.home, .settings {
+  border: none;
+  background-color: transparent;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: var(--main-color);
+}
+
+.btn-active {
+  fill: var(--main-color);
+}
+
+.btn-active::after {
+  content: "";
+  display: block;
+  margin: 10px auto 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--main-color);
 }

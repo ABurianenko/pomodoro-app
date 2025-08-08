@@ -23,61 +23,73 @@
                 00:00
             </h1>
         </div>
-        <ul class="mode">
-            <li class="mode-item">short break</li>
-            <li class="mode-item">pomodoro</li>
-            <li class="mode-item">long break</li>
-        </ul>
+        <div class="mode-container">
+            <ul class="mode">
+                <li class="mode-item">short break</li>
+                <li class="mode-item">pomodoro</li>
+                <li class="mode-item isActive">long break</li>
+            </ul>
+        </div>
+        
         <button class="start">
             <svg>
                 <use id="btn" href="./src/svg/symbol-defs.svg#icon-Play"></use>
             </svg>
-        </button>
-
-
-        <div class="modal hidden">
-            <header>
-                <h2>Settings</h2>
-                <button type="button" data-action="close">
-                    <svg>
-                        <use href="./src/svg/symbol-defs.svg#icon-Close"></use>
-                    </svg>
-                </button>
-            </header>
-            <main>
-                <h3>time (minutes)</h3>
-                <form action="">
-                    <label>
-                        pomodoro
-                        <input type="number" name="pomodoro">
-                    </label>
-                    <label>
-                        short break
-                        <input type="number" name="short">
-                    </label>
-                    <label>
-                        long break
-                        <input type="number" name="long">
-                    </label>
-                </form>
-            </main>
-            <footer>
-                <button type="button" data-action="save">OK</button>
-            </footer>
-        </div>
+        </button>    
     </main>
 
-    <footer>
-        <button>
-            <svg>
-                <use href="./src/svg/symbol-defs.svg#icon-Home-1"></use>
-            </svg>
-        </button><button>
-            <svg>
-                <use href="./src/svg/symbol-defs.svg#icon-Setting"></use>
-            </svg>
-        </button>
+    <footer class="bottom-bar">
+        
+        <svg class="bar-curve" xmlns="http://www.w3.org/2000/svg" width="400" height="105" viewBox="0 0 400 105" fill="none">
+            <path
+                d="M19 0.5H209.174C227.805 0.5 245.36 9.22665 256.607 24.0791L268.77 40.1387C292.978 72.1059 341.022 72.1059 365.23 40.1387L388.984 8.77246C392.93 3.56186 399.089 0.500114 405.625 0.5C417.154 0.5 426.5 9.84625 426.5 21.375V62C426.5 94.8609 399.861 121.5 367 121.5H19C-13.8609 121.5 -40.5 94.8609 -40.5 62V60C-40.5 27.1391 -13.8609 0.5 19 0.5Z"
+                fill="white" stroke="#D047FF" />
+        </svg>
+        <div class="bar-buttons">
+            <button class="home">
+                <svg class="icon">
+                    <use href="./src/svg/symbol-defs.svg#icon-Home-1"></use>
+                </svg>
+            </button>
+            <button class="settings btn-active">
+                <svg class="icon">
+                    <use href="./src/svg/symbol-defs.svg#icon-Setting"></use>
+                </svg>
+            </button>
+        </div>
+        
     </footer>
+
+    <div class="modal hidden">
+        <header>
+            <h2>Settings</h2>
+            <button type="button" data-action="close">
+                <svg>
+                    <use href="./src/svg/symbol-defs.svg#icon-Close"></use>
+                </svg>
+            </button>
+        </header>
+        <main>
+            <h3>time (minutes)</h3>
+            <form action="">
+                <label>
+                    pomodoro
+                    <input type="number" name="pomodoro">
+                </label>
+                <label>
+                    short break
+                    <input type="number" name="short">
+                </label>
+                <label>
+                    long break
+                    <input type="number" name="long">
+                </label>
+            </form>
+        </main>
+        <footer>
+            <button type="button" data-action="save">OK</button>
+        </footer>
+    </div>
 </body>
 
 <script type="module" src="./src/ts/index.ts"></script>
