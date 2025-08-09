@@ -1,21 +1,24 @@
 import { updateDisplay } from "./display";
 import { timerState } from "./state";
-
-//перенести в switchMode()
-// const mode = timerState.mode;
-// const duration = timerState.durations[mode];
-// let timeLeft = timerState.timeLeft;
-// timeLeft = duration * 60;
+import { handleTimerEnd, switchMode, tabEls } from "./switchMode";
 
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
 const btnIcon = document.getElementById('btn');
 
+const pauseTimer = () => {
+    if (timerState.intervalId != null) {
+        clearInterval(timerState.intervalId);
+        timerState.intervalId = null;
+        timerState.isRunning = false;
+        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
+        return
+    }
+}
+
 const startTimer = () => {
     if (timerState.isRunning) {
-        clearInterval(timerState.intervalId);
-        timerState.isRunning = false;
-        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+        pauseTimer();
         return
     }
 
@@ -26,10 +29,18 @@ const startTimer = () => {
         
         timerState.timeLeft--;
 
-        if (timerState.timeLeft === 0) {
+        if (timerState.timeLeft <= 0) {
             clearInterval(timerState.intervalId);
+            timerState.intervalId = null;
             timerState.isRunning = false;
-            btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+            
+            const auto = handleTimerEnd();
+            if (auto) {
+                startTimer()
+            } else {
+                btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
+            }
+            return;
         }
 
         updateDisplay();
@@ -38,15 +49,28 @@ const startTimer = () => {
 
 const resetTimer = () => {
     clearInterval(timerState.intervalId);
+    timerState.intervalId = null;
     timerState.isRunning = false;
     timerState.timeLeft = 0;
-    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
     updateDisplay();
     return;
 }
 
 resetBtn?.addEventListener('click', resetTimer);
-startBtn?.addEventListener('click', startTimer)
+
+function init() {
+    switchMode(timerState.mode);
+    tabEls.forEach((el, i) => {
+        el.addEventListener('click', () => {
+            switchMode(order[i] ?? 'pomodoro');
+        });
+    });
+
+    startBtn?.addEventListener('click', startTimer)
+}
+
+init();
 
 
 export { };
