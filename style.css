@@ -370,7 +370,7 @@ body.modal-open .mode-container {
 .combo__option {
   padding: 8px 10px;
   border-radius: 10px;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.30);
   text-align: center;
   cursor: pointer;
   user-select: none;
@@ -381,7 +381,7 @@ body.modal-open .mode-container {
   background: rgba(255, 255, 255, .35);
 }
 
-.combo__input {
+/* .combo__input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -395,7 +395,7 @@ body.modal-open .mode-container {
   outline: none;
   -webkit-appearance: none;
   appearance: textfield;
-}
+} */
 
 .combo__button:focus-visible,
 .combo__input:focus-visible,

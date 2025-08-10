@@ -1,3 +1,19 @@
+import { initComboboxes } from './combobox';
+import { timerState } from './state';
+import { updateDisplay } from './display';
+
+const initSettingsCombos = () => {
+  initComboboxes(({ mode, value }) => {
+    timerState.durations[mode] = value;
+    if (timerState.mode === mode && !timerState.isRunning) {
+      timerState.timeLeft = value * 60;
+      updateDisplay();
+    }
+  });
+}
+
+initSettingsCombos();
+
 const home = document.querySelector('.home');
 const settings = document.querySelector('.settings')
 const iconHome = document.querySelector('.icon-home');
@@ -23,6 +39,10 @@ const closeModal = () => {
     iconSettings?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Setting');
     iconHome?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Home-2');
     home?.classList.add('btn-active');
+}
+
+const applySettingsFromModal = () => {
+    
 }
 
 settings?.addEventListener('click', openModal);

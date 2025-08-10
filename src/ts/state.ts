@@ -16,8 +16,8 @@ export const timerState: TimerState = {
   intervalId: null,
   completedPomodoros: 0,
   durations: {
-    pomodoro: 0.2,
-    short: 0.05,
-    long: 0.1
+    pomodoro: 25,
+    short: 5,
+    long: 15
   }
 };
