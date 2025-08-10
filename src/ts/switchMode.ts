@@ -13,7 +13,6 @@ export const switchMode = (newMode: Mode) => {
     if (timerState.isRunning) {
             clearInterval(timerState.intervalId);
             timerState.isRunning = false;
-            // btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
         }
 
     timerState.mode = newMode;

@@ -5,13 +5,15 @@ import { handleTimerEnd, switchMode, tabEls } from "./switchMode";
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
 const btnIcon = document.getElementById('btn');
+const iconHome = document.querySelector('.icon-home');
+const home = document.querySelector('.home');
 
 const pauseTimer = () => {
     if (timerState.intervalId != null) {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
         timerState.isRunning = false;
-        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
+        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
         return
     }
 }
@@ -38,7 +40,7 @@ const startTimer = () => {
             if (auto) {
                 startTimer()
             } else {
-                btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
+                btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
             }
             return;
         }
@@ -52,7 +54,7 @@ const resetTimer = () => {
     timerState.intervalId = null;
     timerState.isRunning = false;
     timerState.timeLeft = 0;
-    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-play");
+    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
     updateDisplay();
     return;
 }
@@ -66,7 +68,9 @@ function init() {
             switchMode(order[i] ?? 'pomodoro');
         });
     });
-
+    
+    iconHome?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Home-2');
+    home?.classList.add('btn-active');
     startBtn?.addEventListener('click', startTimer)
 }
 
