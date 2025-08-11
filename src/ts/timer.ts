@@ -8,7 +8,7 @@ const btnIcon = document.getElementById('btn');
 const iconHome = document.querySelector('.icon-home');
 const home = document.querySelector('.home');
 
-const pauseTimer = () => {
+export const pauseTimer = () => {
     if (timerState.intervalId != null) {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
@@ -18,7 +18,7 @@ const pauseTimer = () => {
     }
 }
 
-const startTimer = () => {
+export const startTimer = () => {
     if (timerState.isRunning) {
         pauseTimer();
         return
@@ -53,7 +53,7 @@ const resetTimer = () => {
     clearInterval(timerState.intervalId);
     timerState.intervalId = null;
     timerState.isRunning = false;
-    timerState.timeLeft = 0;
+    timerState.timeLeft = timerState.durations.pomodoro;
     btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
     updateDisplay();
     return;
