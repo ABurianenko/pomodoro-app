@@ -2,7 +2,6 @@ import { initComboboxes } from './combobox';
 import { timerState, type Mode } from './state';
 import { updateDisplay } from './display';
 import { pauseTimer, startTimer } from './timer';
-import { SPRITE } from '.';
 
 let draftDurations: Record<Mode, number> = { ...timerState.durations };
 
@@ -30,8 +29,8 @@ const openModal = () => {
         wasRunningBeforeModal = timerState.isRunning;
         body.classList.add('modal-open');
         settings?.classList.add('btn-active');
-        iconSettings?.setAttribute('href', `${SPRITE}#icon-Setting-2`)
-        iconHome?.setAttribute('href', `${SPRITE}#icon-Home-1`);
+        iconSettings?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Setting-2')
+        iconHome?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Home-1');
         home?.classList.remove('btn-active');
 
         pauseTimer();
@@ -41,8 +40,8 @@ const openModal = () => {
 const closeModal = () => {
     body.classList.remove('modal-open');
     settings?.classList.remove('btn-active');
-    iconSettings?.setAttribute('href', `${SPRITE}icon-Setting`);
-    iconHome?.setAttribute('href', `${SPRITE}icon-Home-2`);
+    iconSettings?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Setting');
+    iconHome?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Home-2');
     home?.classList.add('btn-active');
 }
 
