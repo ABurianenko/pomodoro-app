@@ -7,6 +7,8 @@ export function updateDisplay () {
     let minutes = Math.floor(timerState.timeLeft / 60);
     let seconds = timerState.timeLeft % 60;
 
-    display.textContent= `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    if (display !== null) {
+        display.textContent= `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    }   
 }
 
