@@ -1,7 +1,8 @@
 import { updateDisplay } from "./display";
 import { applySettingsFromModal } from "./modal";
 import { timerState, type Mode } from "./state";
-import { handleTimerEnd, switchMode} from "./switchMode";
+import { handleTimerEnd, switchMode } from "./switchMode";
+import { SPRITE } from ".";
 
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
@@ -15,7 +16,7 @@ export const pauseTimer = () => {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
         timerState.isRunning = false;
-        btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+        btnIcon?.setAttribute("href", `${SPRITE}#icon-Play`);
         return
     }
 }
@@ -27,7 +28,7 @@ export const startTimer = () => {
     }
 
     timerState.isRunning = true;
-    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-pause");
+    btnIcon?.setAttribute("href", `${SPRITE}#icon-pause`);
     applySettingsFromModal();
 
     timerState.intervalId = setInterval(() => {
@@ -43,7 +44,7 @@ export const startTimer = () => {
             if (auto) {
                 startTimer()
             } else {
-                btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+                btnIcon?.setAttribute("href", `${SPRITE}#icon-Play`);
             }
             return;
         }
@@ -61,7 +62,7 @@ const resetTimer = () => {
     timerState.isRunning = false;
     timerState.timeLeft = timerState.durations.pomodoro * 60;
     timerState.completedPomodoros = 0;
-    btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
+    btnIcon?.setAttribute("href", `${SPRITE}icon-Play`);
     updateDisplay();
     return;
 }
@@ -77,7 +78,7 @@ function init() {
         });
     });
     
-    iconHome?.setAttribute('href', './src/svg/symbol-defs.svg#icon-Home-2');
+    iconHome?.setAttribute('href', `${SPRITE}#icon-Home-2`);
     home?.classList.add('btn-active');
     startBtn?.addEventListener('click', startTimer)
 }
