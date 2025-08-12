@@ -3,13 +3,11 @@ import { timerState, type Mode } from './state';
 import { updateDisplay } from './display';
 import { pauseTimer, startTimer } from './timer';
 
+let draftDurations: Record<Mode, number> = { ...timerState.durations };
+
 const initSettingsCombos = () => {
   initComboboxes(({ mode, value }) => {
-    timerState.durations[mode] = value;
-    if (timerState.mode === mode && !timerState.isRunning) {
-      timerState.timeLeft = value * 60;
-      updateDisplay();
-    }
+      draftDurations[mode] = value;
   });
 }
 
@@ -47,36 +45,18 @@ const closeModal = () => {
     home?.classList.add('btn-active');
 }
 
-function readComboValue(mode: Mode): number | null {
-    const row = document.querySelector<HTMLElement>(`.duration-row[data-mode="${mode}"]`);
-    const valEl = row?.querySelector<HTMLElement>('.combo__value');
-    if (!valEl) return null;
-    const raw = Number(valEl.dataset.value ?? valEl.textContent ?? '');
-    return Number.isFinite(raw) ? raw : null;
-}
-
-const applySettingsFromModal = () => {
-    const newPomodoro = readComboValue('pomodoro');
-    const newShort = readComboValue('short');
-    const newLong = readComboValue('long');
-
-    if (newPomodoro === null || newShort === null || newLong === null) {
-        console.warn('Settings: missing values from comboboxes');
-        return;
-    }
-
+export const applySettingsFromModal = () => {
     const prev = timerState.durations;
+    const next = draftDurations;
     
-    const changedP = prev.pomodoro !== newPomodoro;
-    const changedS = prev.short !== newShort;
-    const changedL = prev.long !== newLong;
+    const changedP = prev.pomodoro !== next.pomodoro;
+    const changedS = prev.short !== next.short;
+    const changedL = prev.long !== next.long;
 
     const anythingChanged = changedP || changedS || changedL;
 
     if (anythingChanged) {
-        timerState.durations.pomodoro = newPomodoro;
-        timerState.durations.short = newShort;
-        timerState.durations.long = newLong;
+        timerState.durations = { ...next };
 
         if ((timerState.mode === 'pomodoro' && changedP) ||
             (timerState.mode === 'short'    && changedS) ||
@@ -90,7 +70,7 @@ const applySettingsFromModal = () => {
     closeModal();
 
     if (wasRunningBeforeModal) {
-        startTimer();
+        startTimer()
     }
 
     wasRunningBeforeModal = false;

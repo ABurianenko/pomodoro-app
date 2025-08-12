@@ -5,16 +5,18 @@ type ComboChange = (p: { mode: Mode; value: number }) => void;
 function pad2(n: number) { return String(n).padStart(2, '0'); }
 
 class Combobox {
-  private root: HTMLElement;
-  private mode: Mode;
-  private btn: HTMLButtonElement;
-  private valueEl: HTMLElement;
-  private list: HTMLUListElement;
-  private options: HTMLLIElement[];
-  private isOpen = false;
+    private root: HTMLElement;
+    private mode: Mode;
+    private btn: HTMLButtonElement;
+    private valueEl: HTMLElement;
+    private list: HTMLUListElement;
+    private options: HTMLLIElement[];
+    private isOpen = false;
+    private onChange: ComboChange;
 
-  constructor(root: HTMLElement, private onChange: ComboChange) {
-    this.root = root;
+    constructor(root: HTMLElement, onChange: ComboChange) {
+        this.root = root;
+        this.onChange = onChange;
 
     const row = this.root.closest<HTMLElement>('.duration-row');
     if (!row?.dataset.mode) throw new Error('Combobox: missing parent .duration-row[data-mode]');

@@ -1,12 +1,14 @@
 import { updateDisplay } from "./display";
-import { timerState } from "./state";
-import { handleTimerEnd, switchMode, tabEls } from "./switchMode";
+import { applySettingsFromModal } from "./modal";
+import { timerState, type Mode } from "./state";
+import { handleTimerEnd, switchMode} from "./switchMode";
 
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
 const btnIcon = document.getElementById('btn');
 const iconHome = document.querySelector('.icon-home');
 const home = document.querySelector('.home');
+const tabEls = Array.from(document.querySelectorAll<HTMLElement>('.mode-item'));
 
 export const pauseTimer = () => {
     if (timerState.intervalId != null) {
@@ -26,12 +28,13 @@ export const startTimer = () => {
 
     timerState.isRunning = true;
     btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-pause");
+    applySettingsFromModal();
 
     timerState.intervalId = setInterval(() => {
         
         timerState.timeLeft--;
 
-        if (timerState.timeLeft <= 0) {
+        if (timerState.intervalId !== null && timerState.timeLeft <= 0) {
             clearInterval(timerState.intervalId);
             timerState.intervalId = null;
             timerState.isRunning = false;
@@ -50,10 +53,14 @@ export const startTimer = () => {
 }
 
 const resetTimer = () => {
-    clearInterval(timerState.intervalId);
-    timerState.intervalId = null;
+    if (timerState.intervalId !== null) {
+        clearInterval(timerState.intervalId);
+        timerState.intervalId = null;
+    }
+    
     timerState.isRunning = false;
-    timerState.timeLeft = timerState.durations.pomodoro;
+    timerState.timeLeft = timerState.durations.pomodoro * 60;
+    timerState.completedPomodoros = 0;
     btnIcon?.setAttribute("href", "./src/svg/symbol-defs.svg#icon-Play");
     updateDisplay();
     return;
@@ -63,9 +70,10 @@ resetBtn?.addEventListener('click', resetTimer);
 
 function init() {
     switchMode(timerState.mode);
-    tabEls.forEach((el, i) => {
+    tabEls.forEach((el) => {
         el.addEventListener('click', () => {
-            switchMode(order[i] ?? 'pomodoro');
+            const mode = (el.dataset.mode ?? 'pomodoro') as Mode;
+            switchMode(mode);
         });
     });
     

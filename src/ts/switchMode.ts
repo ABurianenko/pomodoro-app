@@ -1,7 +1,7 @@
 import { updateDisplay } from "./display";
 import { timerState, type Mode } from "./state";
 
-export const tabEls = Array.from(document.querySelectorAll<HTMLElement>('.mode-item'));
+
 
 function setActiveTab(mode: Mode) {
     document.querySelectorAll('.mode-item').forEach(el => el.classList.remove('isActive'));
@@ -10,7 +10,7 @@ function setActiveTab(mode: Mode) {
 }
 
 export const switchMode = (newMode: Mode) => {
-    if (timerState.isRunning) {
+    if (timerState.intervalId !== null) {
             clearInterval(timerState.intervalId);
             timerState.isRunning = false;
         }
