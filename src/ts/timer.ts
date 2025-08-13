@@ -1,6 +1,6 @@
 import { updateDisplay } from "./display";
 import { applySettingsFromModal } from "./modal";
-import { timerState, type Mode } from "./state";
+import { timerState} from "./state";
 import { handleTimerEnd, switchMode } from "./switchMode";
 import { SPRITE } from "./state";
 
@@ -9,7 +9,7 @@ const resetBtn = document.getElementById('reset');
 const btnIcon = document.getElementById('btn');
 const iconHome = document.querySelector('.icon-home');
 const home = document.querySelector('.home');
-const tabEls = Array.from(document.querySelectorAll<HTMLElement>('.mode-item'));
+// const tabEls = Array.from(document.querySelectorAll<HTMLElement>('.mode-item'));
 
 export const pauseTimer = () => {
     if (timerState.intervalId != null) {
@@ -71,12 +71,6 @@ resetBtn?.addEventListener('click', resetTimer);
 
 function init() {
     switchMode(timerState.mode);
-    tabEls.forEach((el) => {
-        el.addEventListener('click', () => {
-            const mode = (el.dataset.mode ?? 'pomodoro') as Mode;
-            switchMode(mode);
-        });
-    });
     
     iconHome?.setAttribute('href', `${SPRITE}#icon-Home-2`);
     home?.classList.add('btn-active');
