@@ -1,8 +1,6 @@
 import { updateDisplay } from "./display";
 import { timerState, type Mode } from "./state";
 
-
-
 function setActiveTab(mode: Mode) {
     document.querySelectorAll('.mode-item').forEach(el => el.classList.remove('isActive'));
     const el = document.querySelector<HTMLElement>(`.mode-item[data-mode="${mode}"]`);
