@@ -2,7 +2,7 @@ import { updateDisplay } from "./display";
 import { applySettingsFromModal } from "./modal";
 import { timerState, type Mode } from "./state";
 import { handleTimerEnd, switchMode } from "./switchMode";
-import { SPRITE } from ".";
+import { SPRITE } from "./state";
 
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');

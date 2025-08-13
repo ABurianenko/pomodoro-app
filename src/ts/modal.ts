@@ -2,7 +2,7 @@ import { initComboboxes } from './combobox';
 import { timerState, type Mode } from './state';
 import { updateDisplay } from './display';
 import { pauseTimer, startTimer } from './timer';
-import { SPRITE } from '.';
+import { SPRITE } from './state';
 
 let draftDurations: Record<Mode, number> = { ...timerState.durations };
 

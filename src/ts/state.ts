@@ -21,3 +21,5 @@ export const timerState: TimerState = {
     long: 15
   }
 };
+
+export const SPRITE = import.meta.env.BASE_URL + 'symbol-defs.svg';
