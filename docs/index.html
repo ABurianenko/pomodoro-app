@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+  <script type="module" crossorigin src="/pomodoro-app/assets/index-VW2cvIO1.js"></script>
+  <link rel="stylesheet" crossorigin href="/pomodoro-app/assets/index-De65kwF9.css">
+</head>
+
+<body>
+    <header>
+        <span class="logo">pomodoro</span>
+        <button type="reset" id="reset">
+            <svg width="24" height="24">
+                <use href="/pomodoro-app/symbol-defs.svg#icon-Refresh-2"></use>
+            </svg>
+        </button>
+    </header>
+    <main>
+        <div class="time-circle">
+            <h1 class="timer">
+                00:00
+            </h1>
+        </div>
+        <div class="mode-container">
+            <ul class="mode">
+                <li data-mode="short" class="mode-item">short break</li>
+                <li data-mode="pomodoro" class="mode-item">pomodoro</li>
+                <li data-mode="long" class="mode-item">long break</li>
+            </ul>
+        </div>
+        
+        <button class="start">
+            <svg>
+                <use id="btn" href="/pomodoro-app/symbol-defs.svg#icon-Play"></use>
+            </svg>
+        </button>  
+        
+        <div class="modal">
+            <header class="modal-header">
+                <h2 class="modal-title">Settings</h2>
+                <button class="close-btn" type="button" data-action="close">
+                    <svg>
+                        <use href="/pomodoro-app/symbol-defs.svg#icon-Close" width="17" height="17"></use>
+                    </svg>
+                </button>
+            </header>
+            <main>
+                
+                <form class="modal-form">
+                    <legend class="modal-subtitle">time (minutes)</legend>
+
+                    <!-- Pomodoro -->
+                    <div class="duration-row" data-mode="pomodoro">
+                        <label class="duration-label" id="lbl-pomo">pomodoro</label>
+                    
+                        <div class="combo" data-mode="pomodoro">
+                            <button type="button" class="combo__button" id="combo-btn-pomo" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-pomo" aria-labelledby="lbl-pomo combo-btn-pomo">
+                                <span class="combo__value" data-value="25" aria-live="polite">25</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                            <ul class="combo__list" id="combo-list-pomo" role="listbox" aria-labelledby="lbl-pomo" hidden>
+                                <li class="combo__option" role="option" data-value="15">15</li>
+                                <li class="combo__option" role="option" data-value="20">20</li>
+                                <li class="combo__option" role="option" data-value="25" aria-selected="true">25</li>
+                                <li class="combo__option" role="option" data-value="30">30</li>
+                                <li class="combo__option" role="option" data-value="35">35</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Short break -->
+                    <div class="duration-row" data-mode="short">
+                        <label class="duration-label" id="lbl-short">short break</label>
+                    
+                        <div class="combo" data-mode="short">
+                            <button type="button" class="combo__button" id="combo-btn-short" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-short" aria-labelledby="lbl-short combo-btn-short">
+                                <span class="combo__value" data-value="5" aria-live="polite">05</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                    
+                            <ul class="combo__list" id="combo-list-short" role="listbox" aria-labelledby="lbl-short" hidden>
+                                <li class="combo__option" role="option" data-value="3">03</li>
+                                <li class="combo__option" role="option" data-value="5" aria-selected="true">05</li>
+                                <li class="combo__option" role="option" data-value="10">10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Long break -->
+                    <div class="duration-row" data-mode="long">
+                        <label class="duration-label" id="lbl-long">long break</label>
+                    
+                        <div class="combo" data-mode="long">
+                            <button type="button" class="combo__button" id="combo-btn-long" aria-haspopup="listbox" aria-expanded="false"
+                                aria-controls="combo-list-long" aria-labelledby="lbl-long combo-btn-long">
+                                <span class="combo__value" data-value="20" aria-live="polite">20</span>
+                                <svg class="combo__chevron" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                    
+                            <ul class="combo__list" id="combo-list-long" role="listbox" aria-labelledby="lbl-long" hidden>
+                                <li class="combo__option" role="option" data-value="15">15</li>
+                                <li class="combo__option" role="option" data-value="20" aria-selected="true">20</li>
+                                <li class="combo__option" role="option" data-value="25">25</li>
+                                <li class="combo__option" role="option" data-value="30">30</li>
+                            </ul>
+                        </div>
+                </form>
+            </main>
+            <footer class="modal-footer">
+                <button class="submit-btn" type="button" data-action="save">OK</button>
+            </footer>
+        </div>
+    </main>
+
+    <footer class="bottom-bar">
+        
+        <svg class="bar-curve" xmlns="http://www.w3.org/2000/svg" width="400" height="105" viewBox="0 0 400 105" fill="none">
+            <path
+                d="M19 0.5H209.174C227.805 0.5 245.36 9.22665 256.607 24.0791L268.77 40.1387C292.978 72.1059 341.022 72.1059 365.23 40.1387L388.984 8.77246C392.93 3.56186 399.089 0.500114 405.625 0.5C417.154 0.5 426.5 9.84625 426.5 21.375V62C426.5 94.8609 399.861 121.5 367 121.5H19C-13.8609 121.5 -40.5 94.8609 -40.5 62V60C-40.5 27.1391 -13.8609 0.5 19 0.5Z"
+                fill="white" stroke="#D047FF" />
+        </svg>
+        <div class="bar-buttons">
+            <button class="home">
+                <svg class="icon">
+                    <use class="icon-home" href="/pomodoro-app/symbol-defs.svg#icon-Home-1"></use>
+                </svg>
+            </button>
+            <button class="settings">
+                <svg class="icon">
+                    <use class="icon-settings" href="/pomodoro-app/symbol-defs.svg#icon-Setting"></use>
+                </svg>
+            </button>
+        </div>
+        
+    </footer>
+
+    
+</body>
+
+
+</html>
