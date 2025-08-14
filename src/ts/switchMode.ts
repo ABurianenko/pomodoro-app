@@ -9,8 +9,10 @@ function setActiveTab(mode: Mode) {
 
 export const switchMode = (newMode: Mode) => {
     if (timerState.intervalId !== null) {
-            clearInterval(timerState.intervalId);
-            timerState.isRunning = false;
+        clearInterval(timerState.intervalId);
+        timerState.intervalId = null;
+        timerState.isRunning = false;
+        timerState.preEndPlayed = false;
         }
 
     timerState.mode = newMode;
@@ -21,6 +23,7 @@ export const switchMode = (newMode: Mode) => {
 }
 
 export const handleTimerEnd = () => {
+    
     let prev = timerState.mode
     if (prev === 'pomodoro') {
         timerState.completedPomodoros += 1;

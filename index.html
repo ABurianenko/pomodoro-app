@@ -11,11 +11,19 @@
 <body>
     <header>
         <span class="logo">pomodoro</span>
-        <button type="reset" id="reset">
-            <svg width="24" height="24">
-                <use href="%BASE_URL%symbol-defs.svg#icon-Refresh-2"></use>
-            </svg>
-        </button>
+        <div class="header-buttons-container">
+            <button type="reset" class="header-button" id="reset">
+                <svg width="24" height="24">
+                    <use href="%BASE_URL%symbol-defs.svg#icon-Refresh-2"></use>
+                </svg>
+            </button>
+            <button class="header-button" id="mute">
+                <svg width="24" height="24">
+                    <use id="mute-icon" href="%BASE_URL%symbol-defs.svg#icon-volume"></use>
+                </svg>
+            </button>
+        </div>
+        
     </header>
     <main>
         <div class="time-circle">
@@ -64,7 +72,7 @@
                                 </svg>
                             </button>
                             <ul class="combo__list" id="combo-list-pomo" role="listbox" aria-labelledby="lbl-pomo" hidden>
-                                <li class="combo__option" role="option" data-value="2">02</li>
+                                <li class="combo__option" role="option" data-value="1">01</li>
                                 <li class="combo__option" role="option" data-value="15">15</li>
                                 <li class="combo__option" role="option" data-value="20">20</li>
                                 <li class="combo__option" role="option" data-value="25" aria-selected="true">25</li>
@@ -110,7 +118,7 @@
                             </button>
                     
                             <ul class="combo__list" id="combo-list-long" role="listbox" aria-labelledby="lbl-long" hidden>
-                                <li class="combo__option" role="option" data-value="2">02</li>
+                                <li class="combo__option" role="option" data-value="1">01</li>
                                 <li class="combo__option" role="option" data-value="15">15</li>
                                 <li class="combo__option" role="option" data-value="20" aria-selected="true">20</li>
                                 <li class="combo__option" role="option" data-value="25">25</li>

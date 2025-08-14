@@ -3,6 +3,7 @@ import { applySettingsFromModal } from "./modal";
 import { timerState} from "./state";
 import { handleTimerEnd, switchMode } from "./switchMode";
 import { SPRITE } from "./state";
+import { playPreEnd, unlockAudio } from "./audio";
 
 const startBtn = document.querySelector('.start')
 const resetBtn = document.getElementById('reset');
@@ -30,12 +31,20 @@ export const startTimer = () => {
     timerState.isRunning = true;
     btnIcon?.setAttribute("href", `${SPRITE}#icon-pause`);
     applySettingsFromModal();
+    unlockAudio();
+    timerState.preEndPlayed = false;
 
     timerState.intervalId = setInterval(() => {
         
         timerState.timeLeft--;
 
+        if (timerState.timeLeft <= timerState.preEndOffsetSec && timerState.timeLeft>0 && !timerState.preEndPlayed) {
+            playPreEnd();
+            timerState.preEndPlayed = true;
+        }
+
         if (timerState.intervalId !== null && timerState.timeLeft <= 0) {
+            
             clearInterval(timerState.intervalId);
             timerState.intervalId = null;
             timerState.isRunning = false;
@@ -62,6 +71,7 @@ const resetTimer = () => {
     timerState.isRunning = false;
     timerState.timeLeft = timerState.durations.pomodoro * 60;
     timerState.completedPomodoros = 0;
+    timerState.preEndPlayed = false;
     btnIcon?.setAttribute("href", `${SPRITE}#icon-Play`);
     updateDisplay();
     return;
