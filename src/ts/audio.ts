@@ -1,16 +1,17 @@
-import { SPRITE, timerState } from "./state";
+import { timerState } from "./state";
+import { SPRITE } from "./config";
 
 const AUDIO = import.meta.env.BASE_URL + 'timer.mp3'
 
 const timerAlarm = new Audio(AUDIO);
 timerAlarm.preload = 'auto';
 
-const muteBtn = document.getElementById('mute');
-const muteIcon = document.getElementById('mute-icon');
+const muteBtn = document.getElementById('mute') as HTMLButtonElement;
+const muteIcon = document.getElementById('mute-icon') as SVGUseElement|null;
 
 let unlocked = false;
 
-export function unlockAudio() {
+export function unlockAudio():void {
     timerAlarm.volume = 0;
     timerAlarm.play().then(() => {
         timerAlarm.pause();
@@ -21,13 +22,13 @@ export function unlockAudio() {
     });
 }
 
-export function playPreEnd() {
+export function playPreEnd():void {
     if (!unlocked || !timerState.soundEnabled) return;
     timerAlarm.currentTime = 0;
-    void timerAlarm.play().catch(() => {})
+    timerAlarm.play().catch(() => {})
 }
 
-function muteAudio() {
+function muteAudio():void {
     if (timerState.soundEnabled) {
         timerState.soundEnabled = false;
         timerAlarm.muted = true;
@@ -37,8 +38,6 @@ function muteAudio() {
         timerAlarm.muted = false;
         muteIcon?.setAttribute("href", `${SPRITE}#icon-volume`);
     }
-    
-    console.log(muteBtn);
 }
 
-muteBtn?.addEventListener('click', muteAudio)
+muteBtn.addEventListener('click', muteAudio)

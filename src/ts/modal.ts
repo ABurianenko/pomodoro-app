@@ -2,11 +2,11 @@ import { initComboboxes } from './combobox';
 import { timerState, type Mode } from './state';
 import { updateDisplay } from './display';
 import { pauseTimer, startTimer } from './timer';
-import { SPRITE } from './state';
+import { SPRITE } from './config';
 
 let draftDurations: Record<Mode, number> = { ...timerState.durations };
 
-const initSettingsCombos = () => {
+const initSettingsCombos = ():void => {
   initComboboxes(({ mode, value }) => {
       draftDurations[mode] = value;
   });
@@ -14,18 +14,18 @@ const initSettingsCombos = () => {
 
 initSettingsCombos();
 
-const home = document.querySelector('.home');
-const settings = document.querySelector('.settings')
-const iconHome = document.querySelector('.icon-home');
-const iconSettings = document.querySelector('.icon-settings');
+const home = document.querySelector<HTMLButtonElement>('.home');
+const settings = document.querySelector<HTMLButtonElement>('.settings')
+const iconHome = document.querySelector<SVGUseElement>('.icon-home');
+const iconSettings = document.querySelector<SVGUseElement>('.icon-settings');
 const body = document.body;
-const closeBtn = document.querySelector('.close-btn[data-action="close"]');
-const btnOk = document.querySelector('.submit-btn[data-action="save"]')
+const closeBtn = document.querySelector<HTMLButtonElement>('.close-btn[data-action="close"]');
+const btnOk = document.querySelector<HTMLButtonElement>('.submit-btn[data-action="save"]')
 
 let isOpen = false;
 let wasRunningBeforeModal = false;
 
-const openModal = () => {
+const openModal = ():void => {
     if (!isOpen) {
         wasRunningBeforeModal = timerState.isRunning;
         body.classList.add('modal-open');
@@ -38,7 +38,7 @@ const openModal = () => {
     } 
 }
 
-const closeModal = () => {
+const closeModal = ():void => {
     body.classList.remove('modal-open');
     settings?.classList.remove('btn-active');
     iconSettings?.setAttribute('href', `${SPRITE}#icon-Setting`);
@@ -46,7 +46,7 @@ const closeModal = () => {
     home?.classList.add('btn-active');
 }
 
-export const applySettingsFromModal = () => {
+export const applySettingsFromModal = ():void => {
     const prev = timerState.durations;
     const next = draftDurations;
     

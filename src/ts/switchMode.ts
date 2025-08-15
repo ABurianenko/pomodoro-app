@@ -1,13 +1,14 @@
+import { CYCLE_LENGTH } from "./config";
 import { updateDisplay } from "./display";
 import { timerState, type Mode } from "./state";
 
 function setActiveTab(mode: Mode) {
-    document.querySelectorAll('.mode-item').forEach(el => el.classList.remove('isActive'));
-    const el = document.querySelector<HTMLElement>(`.mode-item[data-mode="${mode}"]`);
+    document.querySelectorAll<HTMLLIElement>('.mode-item').forEach(el => el.classList.remove('isActive'));
+    const el = document.querySelector<HTMLLIElement>(`.mode-item[data-mode="${mode}"]`);
     el?.classList.add('isActive');
 }
 
-export const switchMode = (newMode: Mode) => {
+export const switchMode = (newMode: Mode):void => {
     if (timerState.intervalId !== null) {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
@@ -22,12 +23,12 @@ export const switchMode = (newMode: Mode) => {
     updateDisplay();
 }
 
-export const handleTimerEnd = () => {
+export const handleTimerEnd = ():boolean => {
     
     let prev = timerState.mode
     if (prev === 'pomodoro') {
         timerState.completedPomodoros += 1;
-        const next: Mode = (timerState.completedPomodoros % 4 === 0) ? 'long' : 'short';
+        const next: Mode = (timerState.completedPomodoros % CYCLE_LENGTH === 0) ? 'long' : 'short';
         switchMode(next);
         return true;
     } else if (prev === 'short') {

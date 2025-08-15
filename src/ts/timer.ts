@@ -2,17 +2,16 @@ import { updateDisplay } from "./display";
 import { applySettingsFromModal } from "./modal";
 import { timerState} from "./state";
 import { handleTimerEnd, switchMode } from "./switchMode";
-import { SPRITE } from "./state";
+import { SPRITE } from "./config";
 import { playPreEnd, unlockAudio } from "./audio";
 
-const startBtn = document.querySelector('.start')
-const resetBtn = document.getElementById('reset');
-const btnIcon = document.getElementById('btn');
-const iconHome = document.querySelector('.icon-home');
-const home = document.querySelector('.home');
-// const tabEls = Array.from(document.querySelectorAll<HTMLElement>('.mode-item'));
+const startBtn = document.querySelector<HTMLButtonElement>('.start')
+const resetBtn = document.getElementById('reset') as HTMLButtonElement;
+const btnIcon = document.getElementById('btn') as SVGUseElement | null;
+const iconHome = document.querySelector<SVGUseElement>('.icon-home');
+const home = document.querySelector<HTMLButtonElement>('.home');
 
-export const pauseTimer = () => {
+export const pauseTimer = ():void => {
     if (timerState.intervalId != null) {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
@@ -22,7 +21,7 @@ export const pauseTimer = () => {
     }
 }
 
-export const startTimer = () => {
+export const startTimer = ():void => {
     if (timerState.isRunning) {
         pauseTimer();
         return
@@ -62,7 +61,7 @@ export const startTimer = () => {
     }, 1000)
 }
 
-const resetTimer = () => {
+const resetTimer = ():void => {
     if (timerState.intervalId !== null) {
         clearInterval(timerState.intervalId);
         timerState.intervalId = null;
@@ -79,7 +78,7 @@ const resetTimer = () => {
 
 resetBtn?.addEventListener('click', resetTimer);
 
-function init() {
+function init():void {
     switchMode(timerState.mode);
     
     iconHome?.setAttribute('href', `${SPRITE}#icon-Home-2`);
