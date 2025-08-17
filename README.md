@@ -9,10 +9,10 @@ Live demo: <https://aburianenko.github.io/pomodoro-app/>
 - Three modes: Pomodoro / Short break / Long break
 - Auto-switching flow:
 
-        After each Pomodoro → Short break
-        Every 4th Pomodoro → Long break
-        After Short break → Pomodoro (auto-continue)
-        After Long break → Pomodoro (stops; user presses Play)
+  - After each Pomodoro → Short break
+  - Every 4th Pomodoro → Long break
+  - After Short break → Pomodoro (auto-continue)
+  - After Long break → Pomodoro (stops; user presses Play)
 
 - Circular progress ring using progressbar.js
 - Settings modal with custom comboboxes (no free text) to set durations per mode
@@ -55,6 +55,7 @@ tsconfig.json
 
 ### State (src/ts/state.ts)
 
+```txt
 type Mode = 'pomodoro' | 'short' | 'long'
 
 timerState = {
@@ -69,14 +70,16 @@ soundEnabled: true,
 preEndOffsetSec: 3, // play audio N secs before zero
 preEndPlayed: false
 }
+```
 
 ### Timer loop (src/ts/timer.ts)
 
 - startTimer() sets isRunning, flips the Play/Pause icon, calls unlockAudio().
 - A setInterval ticks once per second:
-  timeLeft--
-  When timeLeft <= preEndOffsetSec and > 0 and not yet played → playPreEnd()
-  When timeLeft <= 0 → stop interval, call handleTimerEnd():
+
+  - timeLeft--
+  - When timeLeft <= preEndOffsetSec and > 0 and not yet played → playPreEnd()
+  - When timeLeft <= 0 → stop interval, call handleTimerEnd():
 
 - If auto-continue (Pomodoro/Short break) → immediately startTimer() again
 - If Long break ended → stop and show Play
@@ -86,14 +89,15 @@ preEndPlayed: false
 ### Mode switching (src/ts/switchMode.ts)
 
 - switchMode(newMode):
-  Stops any running interval, resets preEndPlayed
-  Sets mode and timeLeft = durations[mode] \* 60
-  Updates active tab class and re-renders the display
+
+  - Stops any running interval, resets preEndPlayed
+  - Sets mode and timeLeft = durations[mode] \* 60
+  - Updates active tab class and re-renders the display
 
 - handleTimerEnd() (“what’s next?”):
-  Pomodoro → Short break (or Long break every 4th cycle)
-  Short → Pomodoro (auto-continue)
-  Long → Pomodoro (stop; user presses Play)
+  - Pomodoro → Short break (or Long break every 4th cycle)
+  - Short → Pomodoro (auto-continue)
+  - Long → Pomodoro (stop; user presses Play)
 
 ### Display & Ring (src/ts/display.ts + src/ts/progressCircle.ts)
 
@@ -105,9 +109,9 @@ preEndPlayed: false
 - Open/Close modal via footer buttons
 - Combobox values update a draft durations object
 - OK button applies changes to timerState.durations and close modal without starting timer
-  If current mode’s duration changed → updates timeLeft
-  If the timer was running before opening → auto-resume with new values
-  Close modal and refresh UI
+  - If current mode’s duration changed → updates timeLeft
+  - If the timer was running before opening → auto-resume with new values
+  - Close modal and refresh UI
 - Play button applies changes to timerState.durations, close modal and start running timer
 
 ### Audio (src/ts/audio.ts)
@@ -116,5 +120,5 @@ preEndPlayed: false
 - playPreEnd() plays timer.mp3 when timeLeft nears zero
 - Mute toggle flips timerState.soundEnabled and icon
 
-Design inspired by the shared Figma community concept.
+Design inspired by the shared Figma community concept.\
 Built by _Anastasiia Burianenko_ with ❤️ in TypeScript.
